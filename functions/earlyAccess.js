@@ -1,35 +1,19 @@
-const faunadb = require('faunadb');
-
-const q = faunadb.query;
-const client = new faunadb.Client({
-    secret: process.env.FAUNA_SECRET_KEY, // Use environment variable
-});
-
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    try {
-        const data = JSON.parse(event.body);
-        const email = data.email;
-        console.log('email: ', email);
-        console.log('secret: ', process.env.FAUNA_SECRET_KEY);
-        await client.query(
-            q.Create(q.Collection('EarlyAccess'), {
-                data: { email: email },
-            })
-        );
-        console.log('Success: Early Access email added to FaunaDB');
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Success' }),
-        };
-    } catch (error) {
-        console.error('FaunaDB Error:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Internal Server Error' }),
-        };
-    }
+    const data = JSON.parse(event.body);
+    const email = data.email;
+
+    // Here, you would add code to send the email to a database or email service.
+    // For now, we'll just log it to the console.
+    console.log('Early Access Email: ', email);
+    console.log('Email new: ', email);
+    console.log('secret: ', process.env.FAUNA_SECRET_KEY);
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Success' }),
+    };
 };
