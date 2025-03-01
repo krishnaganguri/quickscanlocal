@@ -40,7 +40,7 @@
         <section id="signup">
           <h2>Sign up for early access</h2>
           <p>Enter your email to be notified when we launch!</p>
-          <form id="earlyAccessForm" name="earlyAccessA" netlify>
+          <form id="earlyAccessForm" name="earlyAccess" netlify>
             <input type="email" id="email" name="email" placeholder="Your Email" required>
             <button type="submit">Submit</button>
         </form>
@@ -50,15 +50,33 @@
         <p>&copy; 2024 QuickScan Local</p>
     </footer>
     <script>
-      document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const email = document.getElementById('email').value;
-        console.log("Early Access Email:", email);
-        alert("Thank you for your interest. We will contact you soon!");
-        document.getElementById('email').value = "";
-
-        //In a future step, you would add code here to send the email to a database or email service.
-      });
+        document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            const email = document.getElementById('email').value;
+            console.log('Email: ', email);
+            fetch('/.netlify/functions/earlyAccess', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Thank you for your interest. We will contact you soon!');
+                document.getElementById('email').value = ""; //clear input
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
     </script>
 </body>
 </html>
