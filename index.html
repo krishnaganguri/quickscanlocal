@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickScan Local: Simple Digital Check-Ins for Local Businesses</title>
+    <meta name="description" content="QuickScan Local provides easy-to-use digital check-in, feedback, and loyalty solutions for local businesses. No app downloads required.">
+    <meta name="keywords" content="local business, check-in, feedback, loyalty program, QR code, digital check-in, small business, customer engagement">
+    <link rel="canonical" href="https://quickscanlocal.com/">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 20px 0;
+        }
+        main {
+            padding: 40px 20px;
+        }
+        footer {
+            background-color: #e0e0e0;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>QuickScan Local</h1>
+        <p>Effortless Digital Check-Ins for Your Local Business</p>
+    </header>
+    <main>
+        <section>
+            <h2>Simplify Customer Interactions</h2>
+            <p>QuickScan Local provides a simple, web-based system for check-ins, feedback, and loyalty programs. No apps, no hassle.</p>
+            <p>Use QR codes to allow your customers to quickly interact with your business.</p>
+        </section>
+        <section>
+            <h2>Key Features</h2>
+            <ul>
+                <li>Easy QR Code Check-Ins</li>
+                <li>Simple Customer Feedback</li>
+                <li>Basic Digital Loyalty Programs</li>
+                <li>No App Downloads Required</li>
+            </ul>
+        </section>
+        <section>
+            <a href="#signup" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Get Started Today</a>
+        </section>
+        <section id="signup">
+          <h2>Sign up for early access</h2>
+          <p>Enter your email to be notified when we launch!</p>
+          <form id="earlyAccessForm">
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Submit</button>
+          </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 QuickScan Local</p>
+    </footer>
+    <script>
+      document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        console.log("Early Access Email:", email);
+        alert("Thank you for your interest. We will contact you soon!");
+        document.getElementById('email').value = "";
+
+        //In a future step, you would add code here to send the email to a database or email service.
+      });
+    </script>
+</body>
+</html>
