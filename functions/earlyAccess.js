@@ -13,13 +13,14 @@ exports.handler = async (event) => {
     try {
         const data = JSON.parse(event.body);
         const email = data.email;
-
+        console.log('email: ', email);
+        console.log('secret: ', process.env.FAUNA_SECRET_KEY);
         await client.query(
             q.Create(q.Collection('EarlyAccess'), {
                 data: { email: email },
             })
         );
-
+        console.log('Success: Early Access email added to FaunaDB');
         return {
             statusCode: 200,
             body: JSON.stringify({ message: 'Success' }),
