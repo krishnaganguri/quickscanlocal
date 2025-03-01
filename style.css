@@ -1,0 +1,135 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #3498db; /* Blue header */
+    color: white;
+    padding: 40px 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+header .logo-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logo-title-container img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+main {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #3498db;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+a {
+    background-color: #27ae60; /* Green button */
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color: #219653; /* Darker green on hover */
+}
+
+footer {
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    position: relative; /* Remove fixed position for better flow */
+    width: 100%;
+    bottom:0;
+}
+
+#signup {
+  background-color: #ecf0f1;
+  padding: 30px 20px;
+  border-radius: 8px;
+}
+
+#earlyAccessForm input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 250px;
+    margin-right: 10px;
+}
+
+#earlyAccessForm button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#earlyAccessForm button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header {
+        padding: 30px 10px;
+    }
+    header h1 {
+        font-size: 2em;
+    }
+    main {
+        padding: 40px 10px;
+    }
+    #earlyAccessForm input[type="email"] {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    #earlyAccessForm button {
+      width: 100%;
+    }
+
+}
