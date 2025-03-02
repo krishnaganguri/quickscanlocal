@@ -1,55 +1,37 @@
-export const handler = async (event) => {
-    if (event.httpMethod !== "POST") {
-      return { statusCode: 405, body: "Method Not Allowed" };
+exports.handler = async (event) => {
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: 'Method Not Allowed' };
     }
-  
+
     try {
-      const data = JSON.parse(event.body);
-      const email = data.email;
-      console.log("Email:", email);
-      console.log("FAUNA_SECRET_KEY:", process.env.FAUNA_SECRET_KEY);
-  
-      // Define the FQLx query
-      const query = `
-        mutation {
-          create_EarlyAccess(data: { email: "${email}" }) {
-            _id
-            email
-          }
+        const data = JSON.parse(event.body);
+        const email = data.email;
+        console.error('email: ', email);
+
+        const response = await fetch('https://db.fauna.com/collections/EarlyAccess/documents', {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${process.env.FAUNA_SECRET_KEY}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data: { email: email } }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('FaunaDB API Error:', errorData);
+            return { statusCode: response.status, body: JSON.stringify({ error: errorData }) };
         }
-      `;
-  
-      // Send request using fetch
-      const response = await fetch("https://db.fauna.com/graphql", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.FAUNA_SECRET_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query }),
-      });
-  
-      const result = await response.json();
-  
-      if (result.errors) {
-        console.error("FaunaDB Error:", result.errors);
+
         return {
-          statusCode: 500,
-          body: JSON.stringify({ error: "FaunaDB Request Failed", details: result.errors }),
+            statusCode: 200,
+            body: JSON.stringify({ message: 'Success' }),
         };
-      }
-  
-      console.log("Success: Early Access email added to FaunaDB", result);
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Success", data: result.data }),
-      };
     } catch (error) {
-      console.error("Error:", error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "Internal Server Error" }),
-      };
+        console.error('Error:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
     }
-  };
-  
+};
