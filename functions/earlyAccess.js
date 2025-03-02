@@ -8,7 +8,7 @@ exports.handler = async (event) => {
         const email = data.email;
         console.error('email: ', email);
 
-        const response = await fetch('https://db.fauna.com/collections/EarlyAccess/documents', {
+        const response = await fetch('https://db.us.fauna.com/collections/EarlyAccess/documents', {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${process.env.FAUNA_SECRET_KEY}`,
