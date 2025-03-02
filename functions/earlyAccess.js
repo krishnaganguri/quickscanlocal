@@ -1,11 +1,4 @@
-const faunadb = require('faunadb');
-
-const q = faunadb.query;
-const client = new faunadb.Client({
-    secret: process.env.FAUNA_SECRET_KEY, // Use environment variable
-});
-
-exports.handler = async (event) => {
+export const handler = async (event) => {
     if (event.httpMethod !== "POST") {
       return { statusCode: 405, body: "Method Not Allowed" };
     }
@@ -13,30 +6,50 @@ exports.handler = async (event) => {
     try {
       const data = JSON.parse(event.body);
       const email = data.email;
-      console.log("email: ", email);
+      console.log("Email:", email);
+      console.log("FAUNA_SECRET_KEY:", process.env.FAUNA_SECRET_KEY);
   
-      // FQLx query for inserting the email
+      // Define the FQLx query
       const query = `
-        EarlyAccess.create({
-          data: { email: "${email}" }
-        }) {
-          _id
-          email
+        mutation {
+          create_EarlyAccess(data: { email: "${email}" }) {
+            _id
+            email
+          }
         }
       `;
   
-      await client.query(query);
+      // Send request using fetch
+      const response = await fetch("https://db.fauna.com/graphql", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.FAUNA_SECRET_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      });
   
-      console.log("Success: Early Access email added to FaunaDB");
+      const result = await response.json();
+  
+      if (result.errors) {
+        console.error("FaunaDB Error:", result.errors);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: "FaunaDB Request Failed", details: result.errors }),
+        };
+      }
+  
+      console.log("Success: Early Access email added to FaunaDB", result);
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Success" }),
+        body: JSON.stringify({ message: "Success", data: result.data }),
       };
     } catch (error) {
-      console.error("FaunaDB Error:", error);
+      console.error("Error:", error);
       return {
         statusCode: 500,
         body: JSON.stringify({ error: "Internal Server Error" }),
       };
     }
   };
+  
