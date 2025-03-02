@@ -6,29 +6,37 @@ const client = new faunadb.Client({
 });
 
 exports.handler = async (event) => {
-    if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, body: 'Method Not Allowed' };
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
     }
-
+  
     try {
-        const data = JSON.parse(event.body);
-        const email = data.email;
-        console.log('email: ', email);
-        await client.query(
-            q.Create(q.Collection('EarlyAccess'), {
-                data: { email: email },
-            })
-        );
-        console.log('Success: Early Access email added to FaunaDB');
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Success' }),
-        };
+      const data = JSON.parse(event.body);
+      const email = data.email;
+      console.log("email: ", email);
+  
+      // FQLx query for inserting the email
+      const query = `
+        EarlyAccess.create({
+          data: { email: "${email}" }
+        }) {
+          _id
+          email
+        }
+      `;
+  
+      await client.query(query);
+  
+      console.log("Success: Early Access email added to FaunaDB");
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Success" }),
+      };
     } catch (error) {
-        console.error('FaunaDB Error:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Internal Server Error' }),
-        };
+      console.error("FaunaDB Error:", error);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Internal Server Error" }),
+      };
     }
-};
+  };
