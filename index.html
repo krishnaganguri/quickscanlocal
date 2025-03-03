@@ -96,7 +96,6 @@ async function generateAndStoreQRCode() {
         if (!businessName) {
             throw new Error("Please enter a business name.");
         }
-        const qrCode = generateQRCode(businessName);
         const response = await fetch('/.netlify/functions/generateQrCode', {
             method: 'POST',
             headers: {
