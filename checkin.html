@@ -48,6 +48,14 @@
             margin-top: 20px;
             font-weight: bold;
           }
+          #feedbackForm {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
         </style>
       </head>
 <body>
@@ -58,7 +66,10 @@
     <button type="submit">Check In</button>
   </form>
   <div id="message"></div>
-
+  <form id="feedbackForm">
+    <textarea id="feedbackInput" placeholder="Enter your feedback here"></textarea>
+    <button type="submit">Submit Feedback</button>
+</form>
   <script>
     // Get the business name from the query parameter
     const urlParams = new URLSearchParams(window.location.search);
@@ -84,14 +95,17 @@
             document: {
                 businessName: businessName,
                 customerName: customerName,
-                timestamp: new Date().toLocaleTimeString() // Get the QR code image src
+                timestamp: new Date().toLocaleString() // Get the QR code image src
                 },
                 collection: 'checkIn'
             })
         });
 
         if (response.ok) {
-          document.getElementById('message').textContent = "Check-in successful!";
+            document.getElementById('message').innerHTML = `<p>You have successfully checked in to ${decodeURIComponent(businessName)}!</p><p>Check-in time: ${new Date().toLocaleString()}</p> <p>✅</p>`;
+                    document.getElementById('feedbackForm').style.display = 'block'; // Show feedback form
+                    document.getElementById('feedbackForm').dataset.businessName = businessName; // Store businessName for feedback
+                    document.getElementById('feedbackForm').dataset.customerName = customerName; // Store customerName for feedback
         } else {
           document.getElementById('message').textContent = "Error checking in.";
         }
@@ -100,6 +114,46 @@
         document.getElementById('message').textContent = "An error occurred.";
       }
     }
+
+    // Feedback form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const feedback = document.getElementById('feedbackInput').value;
+            const businessName = document.getElementById('feedbackForm').dataset.businessName;
+            const customerName = document.getElementById('feedbackForm').dataset.customerName;
+            submitFeedback(businessName, customerName, feedback);
+        });
+
+        // Call Netlify function to handle feedback submission
+        async function submitFeedback(businessName, customerName, feedback) {
+            try {
+                const response = await fetch('/.netlify/functions/fireBaseUpload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        document: {
+                            businessName: businessName,
+                            customerName: customerName,
+                            feedback: feedback,
+                            timestamp: new Date().toLocaleString()
+                        },
+                        collection: 'feedback'
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Feedback submitted successfully!');
+                    document.getElementById('feedbackInput').value = '';
+                } else {
+                    alert('Error submitting feedback. Please try again.');
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert('An error occurred. Please try again.');
+            }
+        }
   </script>
 </body>
 </html>
