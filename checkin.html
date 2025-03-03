@@ -56,6 +56,11 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
         </style>
       </head>
 <body>
@@ -66,10 +71,12 @@
     <button type="submit">Check In</button>
   </form>
   <div id="message"></div>
+  <div id="checkin-loading" class="loading">Loading...</div>
   <form id="feedbackForm">
     <textarea id="feedbackInput" placeholder="Enter your feedback here"></textarea>
     <button type="submit">Submit Feedback</button>
 </form>
+<div id="feedback-loading" class="loading">Loading...</div>
   <script>
     // Get the business name from the query parameter
     const urlParams = new URLSearchParams(window.location.search);
@@ -85,6 +92,7 @@
 
     // Call Netlify function to handle check-in
     async function checkIn(businessName, customerName) {
+        checkinLoading.style.display = 'block'; // Show loading
       try {
         const response = await fetch('/.netlify/functions/fireBaseUpload', {
           method: 'POST',
@@ -112,6 +120,8 @@
       } catch (error) {
         console.error("Error:", error);
         document.getElementById('message').textContent = "An error occurred.";
+      }finally{
+        checkinLoading.style.display = 'none'; // Hide loading
       }
     }
 
@@ -126,6 +136,7 @@
 
         // Call Netlify function to handle feedback submission
         async function submitFeedback(businessName, customerName, feedback) {
+            feedbackLoading.style.display = 'block'; // Show loading
             try {
                 const response = await fetch('/.netlify/functions/fireBaseUpload', {
                     method: 'POST',
@@ -152,6 +163,8 @@
             } catch (error) {
                 console.error("Error:", error);
                 alert('An error occurred. Please try again.');
+            }finally{
+                feedbackLoading.style.display = 'none'; // Hide loading
             }
         }
   </script>
