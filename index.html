@@ -86,24 +86,24 @@
         });
    
         function generateQRCode(businessName) {
-            const qrCodeData = `https://quickscanlocal.com/checkin?business=${encodeURIComponent(businessName)}`;
+    const qrCodeData = `https://quickscanlocal.com/checkin?business=${encodeURIComponent(businessName)}`;
 
-            // Create a QR code generator instance
-            const qr = new QRCode();
+    // Create a QR code generator instance
+    const qr = new window.QRCode(); // Use window.QRCode
 
-            // Generate the QR code
-            qr.addData(qrCodeData);
-            qr.make();
+    // Generate the QR code
+    qr.addData(qrCodeData);
+    qr.make();
 
-            // Get the QR code as an image
-            const qrCodeImage = qr.createImgTag();
+    // Get the QR code as an image
+    const qrCodeImage = qr.createImgTag();
 
-            // Create a container for the image
-            const qrCodeContainer = document.createElement('div');
-            qrCodeContainer.innerHTML = qrCodeImage;
+    // Create a container for the image
+    const qrCodeContainer = document.createElement('div');
+    qrCodeContainer.innerHTML = qrCodeImage;
 
-            return qrCodeContainer;
-            }
+    return qrCodeContainer;
+}
 
         async function generateAndStoreQRCode() {
             const businessName = document.getElementById('businessName').value;
