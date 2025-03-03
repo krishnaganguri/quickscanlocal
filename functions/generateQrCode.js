@@ -1,4 +1,4 @@
-const QRCode = require('qrcode-generator');
+const QRCode = require('qrcode');
 const saveToDB = require('./util/saveDB');
 
 exports.handler = async (event) => {
@@ -15,11 +15,7 @@ exports.handler = async (event) => {
 
         const qrCodeData = `https://quickscanlocal.com/checkin?business=${encodeURIComponent(businessName)}`;
 
-        const qr = new QRCode();
-        qr.addData(qrCodeData);
-        qr.make();
-
-        const qrCodeImage = qr.createImgTag();
+        const qrCodeImage = await QRCode.toDataURL(qrCodeData);
 
         await saveToDB('qrCodes', { businessName, qrCodeData: qrCodeImage });
 

@@ -2,6 +2,6 @@
   "type": "module",
   "dependencies": {
     "firebase-admin": "^13.1.0",
-    "qrcode-generator": "^1.4.4"
+    "qrcode": "^1.5.4"
   }
 }
