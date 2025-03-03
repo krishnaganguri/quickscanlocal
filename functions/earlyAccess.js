@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+const saveToDB = require('./util/saveDB');
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
@@ -15,7 +16,7 @@ exports.handler = async (event) => {
         const data = JSON.parse(event.body);
         const email = data.email;
         console.log('Firebase email:', email);
-        await admin.firestore().collection('earlyAccess').add({ email: email });
+        await saveToDB('earlyAccess', { email: email });
 
         return {
             statusCode: 200,

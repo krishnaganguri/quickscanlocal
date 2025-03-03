@@ -8,7 +8,6 @@
     <meta name="keywords" content="local business, check-in, feedback, loyalty program, QR code, digital check-in, small business, customer engagement">
     <link rel="canonical" href="https://quickscanlocal.com/">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.1.0/qrcode.min.js"></script>
 </head>
 <body>
     <header>
@@ -57,96 +56,77 @@
         <p>&copy; 2024 QuickScan Local</p>
     </footer>
     <script>
-        document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-    
-            const email = document.getElementById('email').value;
-            console.log('Email: ', email);
-            fetch('/.netlify/functions/earlyAccess', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email }),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                alert('Thank you for your interest. We will contact you soon!');
-                document.getElementById('email').value = ""; //clear input
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
-        });
-   
-        function generateQRCode(businessName) {
-    const qrCodeData = `https://quickscanlocal.com/checkin?business=${encodeURIComponent(businessName)}`;
 
-    // Create a QR code generator instance
-    const qr = new window.QRCode(); // Use window.QRCode
+document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
 
-    // Generate the QR code
-    qr.addData(qrCodeData);
-    qr.make();
-
-    // Get the QR code as an image
-    const qrCodeImage = qr.createImgTag();
-
-    // Create a container for the image
-    const qrCodeContainer = document.createElement('div');
-    qrCodeContainer.innerHTML = qrCodeImage;
-
-    return qrCodeContainer;
-}
-
-        async function generateAndStoreQRCode() {
-            const businessName = document.getElementById('businessName').value;
-            
-            try {
-                // Basic input validation
-                
-                if (!businessName) {
-                    throw new Error("Please enter a business name.");
-                }
-                const qrCode = generateQRCode(businessName);
-                const response = await fetch('/.netlify/functions/fireBaseUpload', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        document: {
-                            businessName: businessName,
-                            qrCodeData: qrCode.firstChild.src, // Get the QR code image src
-                        },
-                        collection: 'qrCodes'
-                    })
-                });
-
-                if (response.ok) {
-                    // Display the QR code
-                    document.getElementById('qrCodeContainer').innerHTML = '';
-                    document.getElementById('qrCodeContainer').appendChild(qrCode);
-                } else {
-                    throw new Error("Error checking in.");
-                }
-            } catch (error) {
-                let errorMessage = "An error occurred.";
-                if (error.message === "Please enter a business name.") {
-                    errorMessage = error.message;
-                } else {
-                    errorMessage = "An error occurred. Please try again.";
-                }
-                console.error("Error storing QR code data:", error);
-                qrCodeContainer.innerHTML = `<p class="error">${errorMessage}</p>`;
-            }
+    const email = document.getElementById('email').value;
+    console.log('Email: ', email);
+    fetch('/.netlify/functions/earlyAccess', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        return response.json();
+    })
+    .then(data => {
+        alert('Thank you for your interest. We will contact you soon!');
+        document.getElementById('email').value = ""; //clear input
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
+});
+
+
+async function generateAndStoreQRCode() {
+    const businessName = document.getElementById('businessName').value;
+    console.log('Business Name:', businessName);
+    
+    try {
+        // Basic input validation
+        
+        if (!businessName) {
+            throw new Error("Please enter a business name.");
+        }
+        const qrCode = generateQRCode(businessName);
+        const response = await fetch('/.netlify/functions/generateQrCode', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                    businessName: businessName // Get the QR code image src
+                }
+            )
+        });
+
+        if (response.ok) {
+            // Display the QR code
+            document.getElementById('qrCodeContainer').innerHTML = '';
+            document.getElementById('qrCodeContainer').appendChild(qrCode);
+        } else {
+            throw new Error("Error checking in.");
+        }
+        
+    } catch (error) {
+        let errorMessage = "An error occurred.";
+        if (error.message === "Please enter a business name.") {
+            errorMessage = error.message;
+        } else {
+            errorMessage = "An error occurred. Please try again.";
+        }
+        console.error("Error storing QR code data:", error);
+        qrCodeContainer.innerHTML = `<p class="error">${errorMessage}</p>`;
+    }
+}
     </script>
-</body>
+    </body>
 </html>

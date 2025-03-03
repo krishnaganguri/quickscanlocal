@@ -1,10 +1,4 @@
-const admin = require('firebase-admin');
-
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+const saveToDB = require('./util/saveDB');
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
@@ -16,7 +10,7 @@ exports.handler = async (event) => {
         const document = data.document;
         const collection = data.collection;
         console.log('Firebase document:', document);
-        await admin.firestore().collection(collection).add(document);
+        await saveToDB(collection, document);
 
         return {
             statusCode: 200,
