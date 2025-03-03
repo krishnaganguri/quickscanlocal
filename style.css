@@ -133,3 +133,7 @@ footer {
     }
 
 }
+.error {
+    color: red;
+    font-weight: bold;
+  }

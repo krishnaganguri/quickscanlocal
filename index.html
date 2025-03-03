@@ -45,10 +45,17 @@
             <button type="submit">Submit</button>
         </form>
         </section>
+        <section id="generateQrCodeSection">
+            <h2>Generate QR Code</h2>
+            <input type="text" id="businessName" placeholder="Enter Business Name">
+            <button onclick="generateAndStoreQRCode()">Generate QR Code for checkin</button>
+            <div id="qrCodeContainer"></div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 QuickScan Local</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script>
         document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
@@ -77,6 +84,59 @@
                 alert('An error occurred. Please try again.');
             });
         });
+    </script>
+    <script>
+        function generateQRCode(businessName) {
+            const qrCodeData = `https://quickscanlocal.com/checkin?business=${encodeURIComponent(businessName)}`;
+
+            const qrCodeContainer = document.createElement('div');
+            new QRCode(qrCodeContainer, qrCodeData);
+
+            return qrCodeContainer;
+        }
+
+        async function generateAndStoreQRCode() {
+            const businessName = document.getElementById('businessName').value;
+            
+            try {
+                // Basic input validation
+                
+                if (!businessName) {
+                    throw new Error("Please enter a business name.");
+                }
+                const qrCode = generateQRCode(businessName);
+                const response = await fetch('/.netlify/functions/fireBaseUpload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        document: {
+                            businessName: businessName,
+                            qrCodeData: qrCode.firstChild.src, // Get the QR code image src
+                        },
+                        collection: 'qrCodes'
+                    })
+                });
+
+                if (response.ok) {
+                    // Display the QR code
+                    document.getElementById('qrCodeContainer').innerHTML = '';
+                    document.getElementById('qrCodeContainer').appendChild(qrCode);
+                } else {
+                    throw new Error("Error checking in.");
+                }
+            } catch (error) {
+                let errorMessage = "An error occurred.";
+                if (error.message === "Please enter a business name.") {
+                    errorMessage = error.message;
+                } else {
+                    errorMessage = "An error occurred. Please try again.";
+                }
+                console.error("Error storing QR code data:", error);
+                qrCodeContainer.innerHTML = `<p class="error">${errorMessage}</p>`;
+            }
+        }
     </script>
 </body>
 </html>
