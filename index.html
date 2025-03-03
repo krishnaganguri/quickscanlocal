@@ -110,8 +110,11 @@ async function generateAndStoreQRCode() {
         if (response.ok) {
             // Display the QR code
             const { qrCodeImage } = await response.json();
+            // Create an <img> element
+            const img = document.createElement('img');
+            img.src = qrCodeImage;
             document.getElementById('qrCodeContainer').innerHTML = '';
-            document.getElementById('qrCodeContainer').appendChild(qrCodeImage);
+            document.getElementById('qrCodeContainer').appendChild(img);
         } else {
             throw new Error("Error checking in.");
         }
