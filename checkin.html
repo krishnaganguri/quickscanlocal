@@ -84,7 +84,7 @@
             document: {
                 businessName: businessName,
                 customerName: customerName,
-                timestamp: admin.firestore.FieldValue.serverTimestamp() // Get the QR code image src
+                timestamp: new Date().toLocaleTimeString() // Get the QR code image src
                 },
                 collection: 'checkIn'
             })

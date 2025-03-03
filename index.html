@@ -60,7 +60,19 @@
 document.getElementById('earlyAccessForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
 
-    const email = document.getElementById('email').value;
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value.trim();
+    const successMessage = document.createElement('div');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email validation regex
+
+    if (!emailRegex.test(email)) {
+        emailInput.classList.add('error');
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    emailInput.classList.remove('error');
+
     console.log('Email: ', email);
     fetch('/.netlify/functions/earlyAccess', {
         method: 'POST',
@@ -76,8 +88,10 @@ document.getElementById('earlyAccessForm').addEventListener('submit', function(e
         return response.json();
     })
     .then(data => {
-        alert('Thank you for your interest. We will contact you soon!');
-        document.getElementById('email').value = ""; //clear input
+        successMessage.textContent = 'Thank you for your interest. We will contact you soon!';
+        successMessage.classList.add('success');
+        document.getElementById('signup').appendChild(successMessage);
+        emailInput.value = "";
     })
     .catch(error => {
         console.error('Error:', error);
@@ -94,7 +108,9 @@ async function generateAndStoreQRCode() {
         // Basic input validation
         
         if (!businessName) {
-            throw new Error("Please enter a business name.");
+            businessNameInput.classList.add('error'); // Add error class to input
+            qrCodeContainer.innerHTML = '<p class="error">Please enter a business name.</p>';
+            return;
         }
         const response = await fetch('/.netlify/functions/generateQrCode', {
             method: 'POST',
@@ -115,8 +131,21 @@ async function generateAndStoreQRCode() {
             img.src = qrCodeImage;
             document.getElementById('qrCodeContainer').innerHTML = '';
             document.getElementById('qrCodeContainer').appendChild(img);
+
+            // Success message
+            successMessage.textContent = 'QR Code generated successfully!';
+            successMessage.classList.add('success');
+            qrCodeContainer.appendChild(successMessage);
+
+            // Download button
+            downloadButton.href = qrCodeImage;
+            downloadButton.download = `${businessName}-qrcode.png`;
+            downloadButton.textContent = 'Download QR Code';
+            downloadButton.classList.add('download-button');
+            qrCodeContainer.appendChild(downloadButton);
         } else {
-            throw new Error("Error checking in.");
+            const { error } = await response.json();
+            throw new Error(error || 'Failed to generate QR code');
         }
         
     } catch (error) {
