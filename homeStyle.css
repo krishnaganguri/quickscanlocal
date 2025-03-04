@@ -1,0 +1,420 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Use a modern font */
+    
+    padding: 0; /* Increased padding */
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    line-height: 1.6;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Increased padding */
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 50px; /* Adjust as needed */
+    margin-right: 15px;
+}
+
+.logo span {
+    font-weight: bold;
+    font-size: 1.8em;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info a {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Example button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.contact-info a:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Hero section styles */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 100px 50px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 3.5em; /* Increased font size */
+    margin-bottom: 20px;
+    font-weight: 600; /* Slightly bolder */
+}
+
+.hero-text p {
+    font-size: 1.3em; /* Increased font size */
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.hero-text a {
+    padding: 12px 24px; /* Increased padding */
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.hero-text a:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.hero-image img {
+    max-width: 450px; /* Increased image size */
+    height: auto;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Section styles (for check-ins and feedback) */
+.section {
+    display: flex;
+    align-items: center;
+    padding: 80px 50px; /* Increased padding */
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.section-reverse {
+    flex-direction: row-reverse;
+}
+
+.section-image {
+    flex: 1;
+}
+
+.section-text {
+    flex: 1;
+    padding: 20px;
+}
+
+.section-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.button {
+    background-color: #007bff; /* Example button color */
+    color: white;
+    padding: 12px 24px; /* Increased padding */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Loyalty section styles */
+.loyalty-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 100px 50px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.loyalty-image img {
+    max-width: 450px; /* Increased image size */
+    height: auto;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.loyalty-text {
+    max-width: 50%;
+}
+
+.loyalty-text h2 {
+    font-size: 2.5em; /* Increased font size */
+    margin-bottom: 20px;
+    font-weight: 600; /* Slightly bolder */
+}
+
+.loyalty-text p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.loyalty-text a {
+    padding: 12px 24px; /* Increased padding */
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.loyalty-text a:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Testimonial and FAQ styles */
+.testimonial-section {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.testimonial-quote {
+    font-size: 1.8em; /* Increased font size */
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.testimonial-attribution {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.testimonial-stars img {
+    width: 25px; /* Increased star size */
+    height: auto;
+}
+
+.faq-section {
+    padding: 80px 20px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5em; /* Increased font size */
+    font-weight: 600; /* Slightly bolder */
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    max-width: 50%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.faq-item:hover {
+    background-color: #f5f5f5; /* Light background on hover */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.faq-answer {
+    display: none;
+    padding-top: 20px;
+    line-height: 1.7;
+}
+
+.chevron {
+    transition: transform 0.3s ease;
+}
+
+.chevron-rotate {
+    transform: rotate(180deg);
+}
+
+/* Call to action styles */
+.cta-section {
+    padding: 100px 20px;
+    background-color: #ffffff; /* White background */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 40px; /* Added margin */
+}
+
+.cta-heading {
+    font-size: 3em; /* Increased font size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cta-subheading {
+    font-size: 1.3em; /* Increased font size */
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    background-color: #007bff; /* Blue button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em; /* Increased font size */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* ... other styles ... */
+
+/* Contact form styles */
+.contact-us-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+   
+    text-align: center;
+}
+
+#contact-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#contact-form textarea {
+    resize: vertical;
+}
+
+#contact-form button[type="submit"] {
+    background-color: white;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contact-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+/* ... other styles ... */
+
+/* Contact button styles */
+#open-contact-form {
+    background-color: #007bff; /* Blue background color */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+#open-contact-form:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slightly lift on hover */
+}
+/* ... other styles ... */
+
+/* Contact form modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    left: 25%;
+    right: 25%;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    background-color: none;
+}
+
+.modal-content {
+    background-color:  #007bff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+}
+
+/* ... other styles ... */

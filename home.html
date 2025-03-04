@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickScan Local - Homepage</title>
+    <link rel="stylesheet" href="homeStyle.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.jpg" alt="QuickScan Local Logo">
+            <span>QuickScan Local</span>
+        </div>
+        <div class="contact-info">
+            <span>3146240521</span>
+            <a href="#">Contact Us</a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-text">
+            <h1>Welcome to QuickScan Local</h1>
+            <p>Transform customer experiences with seamless check-ins, instant feedback, and loyalty rewards.</p>
+            <section class="contact-us-section">
+                <button id="open-contact-form">Contact Us</button>
+            
+                <div id="contact-form-container" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h2>Contact Us</h2>
+                        <form id="contact-form">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                            <input type="email" id="email" placeholder="Your Email" required>
+                            <textarea id="message" placeholder="Your Message" rows="5"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="hero-image">
+            <img src="welcome.jpg" alt="Welcome Image">
+        </div>
+    </main>
+    
+
+    <div class="section">
+        <div class="section-image">
+            <img src="Checkin.jpg" alt="Code Image">
+        </div>
+        <div class="section-text">
+            <h2>Seamless Customer Check-Ins</h2>
+            <p>With QuickScan Local, checking in has never been easier. Your business receives a unique QR code that customers can scan using their smartphones as soon as they walk through the door. This eliminates traditional sign-in sheets and long wait times, providing convenience for both you and your clients. As users engage with this effortless check-in process they feel welcomed right away which encourages them to return again while simplifying your operational flow.</p>
+            <a href="#" class="button">Get Started Today!</a>
+        </div>
+    </div>
+
+    <div class="section section-reverse">
+        <div class="section-image">
+            <img src="feedback.jpg" alt="Phone Image">
+        </div>
+        <div class="section-text">
+            <h2>Instant Feedback for Improvement</h2>
+            <p>QuickScan Local empowers businesses to capture customer feedback instantly after check-ins. Once scanned, patrons are prompted to share their thoughts on their experience fostering an open line of communication. This immediate collection of insights allows you to gauge satisfaction levels promptly understand areas needing attention or enhancement and adapt your services accordingly leading to improved overall performance and increased customer retention rates over time.</p>
+            <a href="#" class="button">See How It Works</a>
+        </div>
+    </div>
+
+    <section class="loyalty-section">
+        <div class="loyalty-image">
+            <img src="loyality.jpg" alt="Laptop and Phone Image">
+        </div>
+        <div class="loyalty-text">
+            <h2>Loyalty Rewards Program</h2>
+            <p>Enhance customer satisfaction with our integrated loyalty rewards program within QuickScan Local. Customers earn points each time they check in or provide valuable feedback making them feel appreciated and recognized for their patronage. These points accumulated can be exchanged easily for discounts exclusive offers or other perks thus incentivizing repeat visits while nurturing lasting relationships between you and your clientele ultimately driving more sales.</p>
+            <a href="#" class="button">Learn About Loyalty Benefits</a>
+        </div>
+    </section>
+
+   
+
+    <section class="faq-section">
+        <h2>Frequently asked questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">
+                What is QuickScan Local?
+                <span class="chevron">&#9660;</span>
+            </div>
+            <div class="faq-answer">
+                QuickScan Local is a web-based application designed to enhance customer engagement by allowing easy check-ins, instant feedback collection, and loyalty rewards for returning customers.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                How does the check-in process work?
+                <span class="chevron">&#9660;</span>
+            </div>
+            <div class="faq-answer">
+                Customers can easily check in by scanning a unique QR code assigned to your business with their smartphones, eliminating the need for traditional sign-in sheets.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                Can I see customer feedback after they check in?
+                <span class="chevron">&#9660;</span>
+            </div>
+            <div class="faq-answer">
+                Yes! Customers have the option to leave feedback immediately after checking in, providing you valuable insights into their experience at your establishment.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                Is there a rewards program integrated into QuickScan Local?
+                <span class="chevron">&#9660;</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely! QuickScan Local includes a built-in loyalty system where customers earn points for checking in or giving feedback. These points can be redeemed for discounts and special offers.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                What features does the dashboard provide?
+                <span class="chevron">&#9660;</span>
+            </div>
+            <div class="faq-answer">
+                The dashboard provides an overview of who is checking in, what type of feedback they are leaving, and how well your loyalty program is performing. It's designed to help you stay informed about customer interactions with your business.
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-heading">Elevate Your Customer Experience</h2>
+        <p class="cta-subheading">Transform how your customers interact with your business. Start using QuickScan Local today to streamline check-ins, gather feedback, and reward loyalty—all in one easy-to-use platform.</p>
+        <a href="#" class="cta-button">Get Started Now</a>
+    </section>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    const chevron = item.querySelector('.chevron');
+
+    question.addEventListener('click', () => {
+        // Toggle the answer's display
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+
+        // Toggle the chevron's rotation class
+        if (answer.style.display === 'block') {
+            chevron.classList.add('chevron-rotate');
+        } else {
+            chevron.classList.remove('chevron-rotate');
+        }
+    });
+
+    const openFormButton = document.getElementById('open-contact-form');
+    const formContainer = document.getElementById('contact-form-container');
+    const closeButton = document.querySelector('.close-button');
+    const contactForm = document.getElementById('contact-form');
+
+    openFormButton.addEventListener('click', () => {
+        formContainer.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', () => {
+        formContainer.style.display = 'none';
+    });
+
+    contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        try{
+            const response = await fetch('/.netlify/functions/fireBaseUpload', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({  
+                    document: {
+                        name: name,
+                        email: email,
+                        message: message
+                    },
+                        collection: 'contacts'
+                    })
+            });
+            if (response.ok) {
+                alert('Thank you for contacting us!');
+                contactForm.reset();
+                formContainer.style.display = 'none';
+            } else {
+                console.error('Error saving contact details: ', error);
+                alert('An error occurred. Please try again later.');
+            }
+        }catch (error) {
+            console.error("Error:", error);
+            alert('An error occurred. Please try again later.');
+        }
+
+        
+    });
+});
+    </script>
+</body>
+</html>

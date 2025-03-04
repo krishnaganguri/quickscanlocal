@@ -110,7 +110,7 @@
         });
 
         if (response.ok) {
-            document.getElementById('message').innerHTML = `<p>You have successfully checked in to ${decodeURIComponent(businessName)}!</p><p>Check-in time: ${new Date().toLocaleString()}</p> <p>✅</p>`;
+            document.getElementById('message').innerHTML = `<p>You have successfully checked in to ${decodeURIComponent(businessName)}!</p><p>Check-in time: ${new Date().toLocaleString()} ✅</p>`;
                     document.getElementById('feedbackForm').style.display = 'block'; // Show feedback form
                     document.getElementById('feedbackForm').dataset.businessName = businessName; // Store businessName for feedback
                     document.getElementById('feedbackForm').dataset.customerName = customerName; // Store customerName for feedback
